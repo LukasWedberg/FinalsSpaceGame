@@ -1,8 +1,11 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "obj_solid",
-  "spriteId": null,
+  "name": "obj_dummy_platform",
+  "spriteId": {
+    "name": "spr_dummy_dot",
+    "path": "sprites/spr_dummy_dot/spr_dummy_dot.yy",
+  },
   "solid": false,
   "visible": true,
   "managed": true,
@@ -25,7 +28,7 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Old objects",
-    "path": "folders/Old objects.yy",
+    "name": "Objects",
+    "path": "folders/Objects.yy",
   },
 }
