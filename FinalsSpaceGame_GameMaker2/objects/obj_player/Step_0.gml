@@ -7,7 +7,7 @@ y_vel += player_gravity;
 
 if(respawn_timer > 0){
 	respawn_timer -= 1;
-	if(respawn_timer == 0){
+	if(respawn_timer == 0){ 
 
 		audio_play_sound(snd_revive, 10,false);
 
