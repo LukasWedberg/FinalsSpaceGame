@@ -28,7 +28,7 @@ jump_hold_timer = 0;
 //Tunables
 player_gravity = 0.1;
 
-jump_force = -7/4;
+jump_force = -7/3;
 
 move_speed = 5;
 
