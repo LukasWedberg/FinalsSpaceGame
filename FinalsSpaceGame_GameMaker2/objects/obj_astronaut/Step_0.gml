@@ -80,11 +80,21 @@ switch(global.astronaut_current_state){
 }
 
 //Movement, here!
+image_speed = 1;
 if(left_key_pressed){
-	x_vel = -move_speed
+	x_vel = -move_speed;
+	
+	image_xscale = -abs(image_xscale);
+	
 }
-if(right_key_pressed){
-	x_vel = move_speed
+else if(right_key_pressed){
+	x_vel = move_speed;
+	
+	
+	image_xscale = abs(image_xscale);
+	
+} else{
+	image_speed = 0;
 }
 
 

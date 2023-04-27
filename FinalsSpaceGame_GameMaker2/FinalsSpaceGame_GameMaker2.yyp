@@ -21,6 +21,7 @@
     {"id":{"name":"spr_stars_effect","path":"sprites/spr_stars_effect/spr_stars_effect.yy",},"order":9,},
     {"id":{"name":"obj_solid","path":"objects/obj_solid/obj_solid.yy",},"order":5,},
     {"id":{"name":"spr_baby_cloud","path":"sprites/spr_baby_cloud/spr_baby_cloud.yy",},"order":1,},
+    {"id":{"name":"spr_proto_space_man","path":"sprites/spr_proto_space_man/spr_proto_space_man.yy",},"order":1,},
     {"id":{"name":"snd_wall","path":"sounds/snd_wall/snd_wall.yy",},"order":4,},
     {"id":{"name":"snd_jump","path":"sounds/snd_jump/snd_jump.yy",},"order":1,},
     {"id":{"name":"spr_cloud_2","path":"sprites/spr_cloud_2/spr_cloud_2.yy",},"order":4,},
