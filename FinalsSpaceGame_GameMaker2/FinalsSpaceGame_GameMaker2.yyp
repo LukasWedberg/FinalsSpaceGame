@@ -10,6 +10,7 @@
     {"id":{"name":"obj_player","path":"objects/obj_player/obj_player.yy",},"order":2,},
     {"id":{"name":"spr_cloud_3","path":"sprites/spr_cloud_3/spr_cloud_3.yy",},"order":7,},
     {"id":{"name":"spr_gradient_thingy","path":"sprites/spr_gradient_thingy/spr_gradient_thingy.yy",},"order":10,},
+    {"id":{"name":"spr_testing_shield","path":"sprites/spr_testing_shield/spr_testing_shield.yy",},"order":5,},
     {"id":{"name":"obj_dummy_platform","path":"objects/obj_dummy_platform/obj_dummy_platform.yy",},"order":1,},
     {"id":{"name":"obj_star","path":"objects/obj_star/obj_star.yy",},"order":6,},
     {"id":{"name":"make_bullets","path":"scripts/make_bullets/make_bullets.yy",},"order":1,},

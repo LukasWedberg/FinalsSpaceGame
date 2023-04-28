@@ -7,6 +7,7 @@ global.astronaut = self;
 global.astronaut_state_falling = "falling";
 global.astronaut_state_grounded = "grounded";
 global.astronaut_state_jumping = "jumping";
+global.astronaut_state_blocking = "blocking";
 global.astronaut_state_knocked_out = "knocked out";
 
 global.astronaut_current_state = global.astronaut_state_falling;
@@ -33,7 +34,7 @@ jump_force = -7/3;
 
 move_speed = 5;
 
-ground_friction = .10;
+ground_friction = .1;
 
 //the player will be able to jump higher by holding the button. 
 //This variable deictates exactly how long they can hold it for. 

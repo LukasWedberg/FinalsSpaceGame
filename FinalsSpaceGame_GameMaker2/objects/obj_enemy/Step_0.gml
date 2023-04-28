@@ -40,7 +40,7 @@ switch(current_state) {
 		}else{
 			
 			bullet_timer = 0;
-			show_debug_message("PEW PEW: " + string(current_time));
+			//show_debug_message("PEW PEW: " + string(current_time));
 			
 			if(point_distance(player.x, player.y, x, y ) > calm_distance) {
 		

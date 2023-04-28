@@ -23,4 +23,3 @@ if(point_distance(x,y, target_x, target_y) < bullet_speed){
 	instance_destroy();
 
 }
-
