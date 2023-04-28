@@ -35,4 +35,12 @@ target_x = 0;
 target_y = 0;
 
 
+
+maximum_hp = 3;
+current_hp = maximum_hp;
+invincibility_frames = room_speed * .5;
+invincibility_timer = 0;
+currently_invincible = false;
+
+
 player = global.astronaut;

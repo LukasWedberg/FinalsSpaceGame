@@ -6,6 +6,7 @@
 jump_key_pressed = keyboard_check(vk_up);
 left_key_pressed = keyboard_check(vk_left);
 right_key_pressed = keyboard_check(vk_right);
+ranged_key_pressed = keyboard_check(ord("E"));
 
 
 
@@ -78,6 +79,36 @@ switch(global.astronaut_current_state){
 
 
 }
+
+
+if(global.astronaut_current_state != global.astronaut_state_knocked_out){
+	
+	bullet_timer++;
+	if(ranged_key_pressed){
+		if(bullet_timer < bullets_per_second){
+		
+		}else{
+			
+			
+			
+			//Here, we make a bullet! Put sound effects and animations here, too.
+			
+			var new_bullet = instance_create_depth(x,y, 0, obj_player_bullet);
+			
+			new_bullet.hspeed = bullet_speed * sign(image_xscale);
+			
+			bullet_timer = 0;			
+		}
+		
+	
+	}
+	
+
+}
+
+
+
+
 
 //Movement, here!
 image_speed = 1;

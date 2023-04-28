@@ -66,3 +66,21 @@ switch(current_state) {
 
 }
 
+
+if(invincibility_timer > 0){
+	invincibility_timer--;
+	currently_invincible = true;
+	
+	image_blend = c_red;
+
+}else{
+	currently_invincible = false;
+	
+	image_blend = c_white;
+}
+
+
+if(current_hp <= 0 ){
+	instance_destroy();
+
+}

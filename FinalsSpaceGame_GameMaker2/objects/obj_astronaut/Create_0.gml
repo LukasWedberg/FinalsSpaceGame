@@ -38,3 +38,10 @@ ground_friction = .10;
 //the player will be able to jump higher by holding the button. 
 //This variable deictates exactly how long they can hold it for. 
 jump_hold_frames_in_seconds = room_speed * 1;
+
+
+
+
+bullets_per_second = room_speed * .5;
+bullet_timer = bullets_per_second;
+bullet_speed = 3;
