@@ -189,12 +189,15 @@ for (i = 0; i < abs(y_vel); i++){
 	if( (platform_collision || place_meeting(x,y+dir, obj_enemy) || bullet_collision) && global.astronaut_current_state == global.astronaut_state_blocking ){
 			y_vel = -y_vel;
 		
-			y -= dir;
+		
+			//We're shifting the y over a tiny bit so we don't get stuck in the ground!
+			y -= dir*3;
 		
 			show_debug_message("BOING: "  + string(current_time));
 		
 						
 			if(bullet_collision){
+				
 				instance_destroy(bullet_collision);
 			}
 		
@@ -258,13 +261,18 @@ for (i = 0; i < abs(x_vel); i++){
 			//This first if-statement is for collisions when in bubble mode. 
 			x_vel = -x_vel;
 			
-			x -= dir;
+			
+			//We're shifting the x over a tiny bit so we don't get stuck in the ground!
+			x -= dir*3;
 			
 			
 			show_debug_message("BOING: "  + string(current_time));
 		
 						
 			if(bullet_collision){
+				
+				//x_vel = bullet_collision.direction_x * bullet_collision.bullet_speed;
+				
 				instance_destroy(bullet_collision);
 			}
 		
