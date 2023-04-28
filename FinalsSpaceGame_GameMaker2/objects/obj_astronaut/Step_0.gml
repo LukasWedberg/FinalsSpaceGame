@@ -189,6 +189,10 @@ for (i = 0; i < abs(y_vel); i++){
 	if( (platform_collision || place_meeting(x,y+dir, obj_enemy) || bullet_collision) && global.astronaut_current_state == global.astronaut_state_blocking ){
 			y_vel = -y_vel;
 		
+			y -= dir;
+		
+			show_debug_message("BOING: "  + string(current_time));
+		
 						
 			if(bullet_collision){
 				instance_destroy(bullet_collision);
@@ -200,7 +204,7 @@ for (i = 0; i < abs(y_vel); i++){
 			//We've hit something the player collides with -- time to stop moving them.
 			y_vel = 0;
 			
-			show_debug_message("PLATFORME");
+			show_debug_message("PLATFORME:" + string(current_time));
 		
 		
 			//We'll need to watch this next line carefully! 
@@ -251,9 +255,13 @@ for (i = 0; i < abs(x_vel); i++){
 	platform_collision = place_meeting(x+dir,y, obj_dummy_platform);
 	
 	if( (platform_collision || place_meeting(x+dir,y, obj_enemy) || bullet_collision) && global.astronaut_current_state == global.astronaut_state_blocking ){
-			//This first if statement is for collisions when in bubble mode. 
-			
+			//This first if-statement is for collisions when in bubble mode. 
 			x_vel = -x_vel;
+			
+			x -= dir;
+			
+			
+			show_debug_message("BOING: "  + string(current_time));
 		
 						
 			if(bullet_collision){
@@ -266,7 +274,7 @@ for (i = 0; i < abs(x_vel); i++){
 			//We've hit something the player collides with -- time to stop moving them.
 			x_vel = 0;
 			
-			show_debug_message("PLATFORME");
+			show_debug_message("PLATFORME: "  + string(current_time));
 		
 		
 			//We'll need to watch this next line carefully! 
