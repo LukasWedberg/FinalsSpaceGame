@@ -1,12 +1,13 @@
 /// @description Insert description here
 // You can write your code in this editor
 
-
+global.astronaut = self;
 
 //State-based behavior
 global.astronaut_state_falling = "falling";
 global.astronaut_state_grounded = "grounded";
 global.astronaut_state_jumping = "jumping";
+global.astronaut_state_knocked_out = "knocked out";
 
 global.astronaut_current_state = global.astronaut_state_falling;
 
