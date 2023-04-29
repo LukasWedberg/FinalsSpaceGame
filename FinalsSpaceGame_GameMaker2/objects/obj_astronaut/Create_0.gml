@@ -9,6 +9,7 @@ global.astronaut_state_grounded = "grounded";
 global.astronaut_state_jumping = "jumping";
 global.astronaut_state_blocking = "blocking";
 global.astronaut_state_knocked_out = "knocked out";
+global.astronaut_state_respawning = "respawning";
 
 global.astronaut_current_state = global.astronaut_state_falling;
 
@@ -42,7 +43,15 @@ jump_hold_frames_in_seconds = room_speed * 1;
 
 
 
-
 bullets_per_second = room_speed * .5;
 bullet_timer = bullets_per_second;
 bullet_speed = 3;
+
+
+
+maximum_hp = 3;
+current_hp = maximum_hp;
+alive = true;
+
+respawn_time = room_speed * 3;
+respawn_timer = 0;

@@ -96,6 +96,23 @@ switch(global.astronaut_current_state){
 	break;
 
 
+	case global.astronaut_state_knocked_out:
+	
+		if(respawn_timer < respawn_time){
+			respawn_timer++;
+		}else{
+			respawn_timer = 0;
+			
+			
+		
+			show_debug_message("TIME TO GET UP: "  + string(current_time));
+
+			
+			global.astronaut_current_state = global.astronaut_state_respawning;
+		}
+	
+	break;
+
 
 }
 
@@ -157,6 +174,33 @@ if(global.astronaut_current_state != global.astronaut_state_knocked_out && globa
 		}
 		
 	
+	}
+	
+	
+	
+	bullet_collision = instance_place(x,y, obj_bullet);
+
+	if(bullet_collision){
+		current_hp--;
+		
+		show_debug_message("OUCHIEEE: "  + string(current_time));
+		
+		instance_destroy(bullet_collision);
+		
+		
+		if(current_hp <= 0){
+			
+			x_vel = 0;
+			y_vel = 0;
+			
+			image_speed = 0;
+			
+			global.astronaut_current_state = global.astronaut_state_knocked_out;
+		
+			
+		}
+		
+		
 	}
 	
 
@@ -258,59 +302,45 @@ for (i = 0; i < abs(x_vel); i++){
 	platform_collision = place_meeting(x+dir,y, obj_dummy_platform);
 	
 	if( (platform_collision || place_meeting(x+dir,y, obj_enemy) || bullet_collision) && global.astronaut_current_state == global.astronaut_state_blocking ){
-			//This first if-statement is for collisions when in bubble mode. 
-			x_vel = -x_vel;
+		//This first if-statement is for collisions when in bubble mode. 
+		x_vel = -x_vel;
 			
 			
-			//We're shifting the x over a tiny bit so we don't get stuck in the ground!
-			x -= dir*3;
+		//We're shifting the x over a tiny bit so we don't get stuck in the ground!
+		x -= dir*3;
 			
 			
-			show_debug_message("BOING: "  + string(current_time));
+		show_debug_message("BOING: "  + string(current_time));
 		
-						
-			if(bullet_collision){
+					
+		if(bullet_collision){
 				
-				//x_vel = bullet_collision.direction_x * bullet_collision.bullet_speed;
-				
-				instance_destroy(bullet_collision);
-			}
-		
-		
-		}else if(platform_collision){
+			//x_vel = bullet_collision.direction_x * bullet_collision.bullet_speed;
 			
-			//We've hit something the player collides with -- time to stop moving them.
-			x_vel = 0;
+			instance_destroy(bullet_collision);
+		}
+		
+		
+	}else if(platform_collision){
 			
-			show_debug_message("PLATFORME: "  + string(current_time));
+		//We've hit something the player collides with -- time to stop moving them.
+		x_vel = 0;
+			
+		show_debug_message("PLATFORME: "  + string(current_time));
 		
 		
-			//We'll need to watch this next line carefully! 
-			//It works right now because we're only checkig for collisions with the floor
-			//When tile sets are added, we'll have to check for the cieling seperately. 
-			//Otherwise, the state would become 'grounded' upon collision with the cieling!
-			global.astronaut_current_state = global.astronaut_state_grounded;
+		//We'll need to watch this next line carefully! 
+		//It works right now because we're only checkig for collisions with the floor
+		//When tile sets are added, we'll have to check for the cieling seperately. 
+		//Otherwise, the state would become 'grounded' upon collision with the cieling!
+		global.astronaut_current_state = global.astronaut_state_grounded;
 		
 		break;
 		
-		}else if(platform_collision){
-			
-			//We've hit something the player collides with -- time to stop moving them.
-			x_vel = 0;
-		
-		
-			//We'll need to watch this next line carefully! 
-			//It works right now because we're only checkig for collisions with the floor
-			//When tile sets are added, we'll have to check for the cieling seperately. 
-			//Otherwise, the state would become 'grounded' upon collision with the cieling!
-			global.astronaut_current_state = global.astronaut_state_grounded;
-		
-		break;
 	}else{
 		x = x + dir;
 		
 		//If this is the final inch, we also have to add the remaining decimal numbers!
-		
 		if(dir < 0){
 		
 			if( floor(abs(x_vel)) == i){
