@@ -3,8 +3,8 @@
   "resourceVersion": "1.0",
   "name": "obj_enemy_pointhead",
   "spriteId": {
-    "name": "spr_dummy_dot",
-    "path": "sprites/spr_dummy_dot/spr_dummy_dot.yy",
+    "name": "spr_pointhead_idle",
+    "path": "sprites/spr_pointhead_idle/spr_pointhead_idle.yy",
   },
   "solid": false,
   "visible": true,

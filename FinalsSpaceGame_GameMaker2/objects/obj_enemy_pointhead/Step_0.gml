@@ -73,6 +73,8 @@ switch(current_state){
 			}else{
 			
 				move_direction = sign(player.x - x);
+				
+				image_xscale = abs(image_xscale) * -move_direction;
 		
 				x_vel = (move_speed * move_direction) * (sin(current_time*franticness) + 1)/2 ;
 				
