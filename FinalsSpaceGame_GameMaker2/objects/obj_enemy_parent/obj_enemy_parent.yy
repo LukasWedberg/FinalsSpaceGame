@@ -2,10 +2,7 @@
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
   "name": "obj_enemy_parent",
-  "spriteId": {
-    "name": "spr_testing_enemy",
-    "path": "sprites/spr_testing_enemy/spr_testing_enemy.yy",
-  },
+  "spriteId": null,
   "solid": false,
   "visible": true,
   "managed": true,
