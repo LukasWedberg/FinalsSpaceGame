@@ -55,3 +55,20 @@ alive = true;
 
 respawn_time = room_speed * 8;
 respawn_timer = 0;
+
+
+
+
+
+//I thought some particles might be fun for when the astronaut goes into bubble mode
+
+parts = part_system_create_layer("Instances", false);
+part_system_depth(parts, -1000000);
+
+bubble_bit = part_type_create();
+part_type_shape(bubble_bit, pt_shape_pixel);
+part_type_size(bubble_bit, 7, 10, 0, 0);
+part_type_speed(bubble_bit, 4, 8, -0.10, 0);
+part_type_direction(bubble_bit, 0, 360, 0,10);
+part_type_colour3(bubble_bit, c_white, c_white, #31A2F2);
+part_type_life(bubble_bit, 7, 15);

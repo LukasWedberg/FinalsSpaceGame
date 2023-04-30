@@ -202,6 +202,9 @@ if(alive && global.astronaut_current_state != global.astronaut_state_blocking){
 		y_vel = 0;
 			
 		image_speed = 0;
+		
+		show_debug_message("KO!");
+			
 			
 		global.astronaut_current_state = global.astronaut_state_knocked_out;
 			
@@ -245,6 +248,15 @@ for (i = 0; i < abs(y_vel); i++){
 			y -= dir*3;
 		
 			show_debug_message("BOING: "  + string(current_time));
+		
+		
+		
+			//Down here we make some shield particles because we're bouncing!
+			
+			part_type_speed(bubble_bit, abs(y_vel), abs( y_vel*2) , -0.10, 0);
+			
+			part_particles_create(parts, x, y + (sprite_height/2) * dir , bubble_bit, 10);
+		
 		
 						
 			if(bullet_collision){
@@ -316,8 +328,15 @@ for (i = 0; i < abs(x_vel); i++){
 		//We're shifting the x over a tiny bit so we don't get stuck in the ground!
 		x -= dir*3;
 			
-			
 		show_debug_message("BOING: "  + string(current_time));
+		
+		
+		//Down here we make some shield particles because we're bouncing!
+		
+		part_type_speed(bubble_bit, abs(x_vel), abs( x_vel*2) , -0.10, 0);
+			
+		part_particles_create(parts, x + (sprite_width/2) * dir, y, bubble_bit, 10);
+		
 		
 					
 		if(bullet_collision){

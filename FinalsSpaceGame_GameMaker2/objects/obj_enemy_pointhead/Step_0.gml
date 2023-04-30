@@ -52,7 +52,7 @@ switch(current_state){
 				}else{
 					//Put attacking animations and sounds here!
 					
-					if(player_distance < attacking_distance){
+					if(player_distance < attacking_distance && global.astronaut_current_state != global.astronaut_state_blocking){
 				
 						show_debug_message("BOO!: " + string(current_time) );	
 				
