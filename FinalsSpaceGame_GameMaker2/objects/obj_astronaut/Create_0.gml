@@ -53,5 +53,5 @@ maximum_hp = 3;
 current_hp = maximum_hp;
 alive = true;
 
-respawn_time = room_speed * 3;
+respawn_time = room_speed * 8;
 respawn_timer = 0;

@@ -114,17 +114,25 @@ switch(global.astronaut_current_state){
 	break;
 
 
+	case global.astronaut_state_respawning:
+	
+			
+	
+	
+	break;
+
+
 }
 
 
-if(global.astronaut_current_state != global.astronaut_state_knocked_out && global.astronaut_current_state != global.astronaut_state_blocking){
+if(alive && global.astronaut_current_state != global.astronaut_state_blocking){
 	
 	bullet_timer++;
 	x_vel *= ground_friction;
 	
 	
 	
-		//Movement, here!
+	//Movement, here!
 	image_speed = 1;
 	if(left_key_pressed){
 		x_vel = -move_speed;
@@ -185,22 +193,21 @@ if(global.astronaut_current_state != global.astronaut_state_knocked_out && globa
 		
 		show_debug_message("OUCHIEEE: "  + string(current_time));
 		
-		instance_destroy(bullet_collision);
-		
-		
-		if(current_hp <= 0){
+		instance_destroy(bullet_collision);		
+	}
+	
+	if(current_hp <= 0){
 			
-			x_vel = 0;
-			y_vel = 0;
+		x_vel = 0;
+		y_vel = 0;
 			
-			image_speed = 0;
+		image_speed = 0;
 			
-			global.astronaut_current_state = global.astronaut_state_knocked_out;
+		global.astronaut_current_state = global.astronaut_state_knocked_out;
+			
+		alive = false;
 		
 			
-		}
-		
-		
 	}
 	
 
@@ -230,7 +237,7 @@ for (i = 0; i < abs(y_vel); i++){
 	
 	platform_collision = place_meeting(x,y+dir, obj_dummy_platform);
 	
-	if( (platform_collision || place_meeting(x,y+dir, obj_enemy) || bullet_collision) && global.astronaut_current_state == global.astronaut_state_blocking ){
+	if( (platform_collision || place_meeting(x,y+dir, obj_enemy_parent) || bullet_collision) && global.astronaut_current_state == global.astronaut_state_blocking ){
 			y_vel = -y_vel;
 		
 		
@@ -301,7 +308,7 @@ for (i = 0; i < abs(x_vel); i++){
 	
 	platform_collision = place_meeting(x+dir,y, obj_dummy_platform);
 	
-	if( (platform_collision || place_meeting(x+dir,y, obj_enemy) || bullet_collision) && global.astronaut_current_state == global.astronaut_state_blocking ){
+	if( (platform_collision || place_meeting(x+dir,y, obj_enemy_parent) || bullet_collision) && global.astronaut_current_state == global.astronaut_state_blocking ){
 		//This first if-statement is for collisions when in bubble mode. 
 		x_vel = -x_vel;
 			
@@ -327,13 +334,6 @@ for (i = 0; i < abs(x_vel); i++){
 		x_vel = 0;
 			
 		show_debug_message("PLATFORME: "  + string(current_time));
-		
-		
-		//We'll need to watch this next line carefully! 
-		//It works right now because we're only checkig for collisions with the floor
-		//When tile sets are added, we'll have to check for the cieling seperately. 
-		//Otherwise, the state would become 'grounded' upon collision with the cieling!
-		global.astronaut_current_state = global.astronaut_state_grounded;
 		
 		break;
 		

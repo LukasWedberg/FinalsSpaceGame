@@ -52,6 +52,9 @@ switch(current_state) {
 				bullet_timer = bullets_per_second;
 			}else{
 				
+				target_x = global.astronaut.x;
+				target_y = global.astronaut.y;
+				
 				//play bullet noises or make sprite changes here!
 				make_bullets(x,y, target_x, target_y, global.bullet_technique_standard);
 			}
