@@ -56,7 +56,9 @@ switch(current_state){
 				
 						show_debug_message("BOO!: " + string(current_time) );	
 				
-						player.current_hp = 0;								
+						player.current_hp = 0;
+						
+						player.oogly_boogly_type = enemy_type;
 					
 					}
 					
@@ -104,6 +106,8 @@ if(invincibility_timer > 0){
 }
 
 if(current_hp <= 0 ){
+	part_particles_create(parts, x, y+sprite_height/2, giblets, 10);
+	
 	instance_destroy();
 
 }

@@ -56,7 +56,7 @@ switch(current_state) {
 				target_y = global.astronaut.y;
 				
 				//play bullet noises or make sprite changes here!
-				make_bullets(x,y, target_x, target_y, global.bullet_technique_standard);
+				make_bullets(self, x, y, target_x, target_y, global.bullet_technique_standard);
 			}
 		
 		}

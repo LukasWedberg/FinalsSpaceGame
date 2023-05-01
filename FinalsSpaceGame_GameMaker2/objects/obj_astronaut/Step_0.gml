@@ -191,9 +191,12 @@ if(alive && global.astronaut_current_state != global.astronaut_state_blocking){
 	if(bullet_collision){
 		current_hp--;
 		
+		oogly_boogly_type = bullet_collision.sender.enemy_type;
+		
 		show_debug_message("OUCHIEEE: "  + string(current_time));
 		
 		instance_destroy(bullet_collision);		
+		
 	}
 	
 	if(current_hp <= 0){
@@ -204,6 +207,8 @@ if(alive && global.astronaut_current_state != global.astronaut_state_blocking){
 		image_speed = 0;
 		
 		show_debug_message("KO!");
+		
+		part_particles_create(parts, x, y+sprite_height/2, giblets, 10);
 			
 			
 		global.astronaut_current_state = global.astronaut_state_knocked_out;

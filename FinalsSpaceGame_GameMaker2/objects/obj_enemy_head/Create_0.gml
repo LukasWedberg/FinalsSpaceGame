@@ -1,6 +1,11 @@
 /// @description Insert description here
 // You can write your code in this editor
 
+global.enemy_type_head = "head";
+enemy_type = global.enemy_type_head;
+
+
+
 global.enemy_state_calm = "calm";
 global.enemy_state_bracing_for_battle = "bracing";
 global.enemy_state_attacking = "attacking";

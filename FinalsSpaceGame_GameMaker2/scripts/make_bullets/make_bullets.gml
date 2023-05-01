@@ -4,7 +4,7 @@
 global.bullet_technique_standard = "standard";
 
 
-function make_bullets(origin_x, origin_y, target_x, target_y, technique){
+function make_bullets(sender,origin_x, origin_y, target_x, target_y, technique){
 	switch(technique) {
 	
 		case global.bullet_technique_standard:
@@ -18,6 +18,9 @@ function make_bullets(origin_x, origin_y, target_x, target_y, technique){
 		
 			new_bullet.direction_x = dsin(new_bullet.bullet_direction);
 			new_bullet.direction_y = dcos(new_bullet.bullet_direction);
+			
+			
+			new_bullet.sender = sender;
 		
 		
 		

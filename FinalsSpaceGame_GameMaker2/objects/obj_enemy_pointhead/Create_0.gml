@@ -1,6 +1,11 @@
 /// @description Insert description here
 // You can write your code in this editor
 
+global.enemy_type_pointhead = "pointhead";
+enemy_type = global.enemy_type_pointhead;
+
+
+
 
 global.enemy_state_calm = "calm";
 global.enemy_state_bracing_for_battle = "bracing";
@@ -18,7 +23,7 @@ y_vel = 0;
 
 
 
-pointy_gravity = .01;
+pointy_gravity = .08;
 
 
 
@@ -61,3 +66,16 @@ currently_invincible = false;
 
 
 player = global.astronaut;
+
+
+
+parts = part_system_create_layer("Instances", false);
+part_system_depth(parts, -1000000);
+
+giblets = part_type_create();
+part_type_shape(giblets, pt_shape_ring); 
+part_type_size(giblets, .05, .25, 0, .05);
+part_type_speed(giblets, 4, 8, -0.20, 0);
+part_type_direction(giblets, 45, 135, 0,20);
+part_type_colour3(giblets, c_red, c_red, c_black);
+part_type_life(giblets, 30, 40);
