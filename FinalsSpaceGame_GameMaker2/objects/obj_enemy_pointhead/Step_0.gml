@@ -44,10 +44,17 @@ switch(current_state){
 				
 				x_vel *= .8;	
 				
-				if(attacking_start_lag_time > attacking_start_lag_timer){
+				sprite_index = spr_pointhead_attack;
+				
+				if(attacking_start_lag_timer == 0){
+					image_index = 0;			
+				}
+				
+				if(image_index < image_number-1){
+					
 					attacking_start_lag_timer++;
 					
-					image_angle = random(360);// I made the enemy spin just for testing purposes!
+					//image_angle = random(360);// I made the enemy spin (when winding up for an attack) just for testing purposes!
 				
 				}else{
 					//Put attacking animations and sounds here!
@@ -66,6 +73,10 @@ switch(current_state){
 				
 					image_angle = 0;
 					
+					sprite_index = spr_pointhead_idle;
+					
+					x_vel = 0;
+					
 					current_state = global.enemy_state_bracing_for_battle;
 					
 					aggro_countdown_timer = aggro_countdown_time*1.5;
@@ -74,11 +85,20 @@ switch(current_state){
 		
 			}else{
 			
-				move_direction = sign(player.x - x);
+				var move_direction = sign(player.x - x);
 				
 				image_xscale = abs(image_xscale) * -move_direction;
 		
-				x_vel = (move_speed * move_direction) * (sin(current_time*franticness) + 1)/2 ;
+				sprite_index = spr_pointhead_walk;
+				
+				
+				
+				//The next few lines are commented out, but only optionally. They give the pointhead more of a "lurch-y" walk.
+				
+				//var walk_alpha = (sin(current_time*franticness) + 1)/2
+				//image_speed = walk_alpha;
+		
+				x_vel = (move_speed * move_direction)// * walk_alpha;
 				
 				
 				

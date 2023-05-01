@@ -206,6 +206,8 @@ if(alive && global.astronaut_current_state != global.astronaut_state_blocking){
 			
 		image_speed = 0;
 		
+		image_alpha = 0;
+		
 		show_debug_message("KO!");
 		
 		part_particles_create(parts, x, y+sprite_height/2, giblets, 10);

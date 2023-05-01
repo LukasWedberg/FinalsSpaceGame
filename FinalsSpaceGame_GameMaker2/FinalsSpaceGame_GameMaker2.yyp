@@ -16,6 +16,7 @@
     {"id":{"name":"obj_dummy_platform","path":"objects/obj_dummy_platform/obj_dummy_platform.yy",},"order":1,},
     {"id":{"name":"obj_star","path":"objects/obj_star/obj_star.yy",},"order":6,},
     {"id":{"name":"make_bullets","path":"scripts/make_bullets/make_bullets.yy",},"order":1,},
+    {"id":{"name":"spr_pointhead_attack","path":"sprites/spr_pointhead_attack/spr_pointhead_attack.yy",},"order":9,},
     {"id":{"name":"spr_screen_shroud","path":"sprites/spr_screen_shroud/spr_screen_shroud.yy",},"order":8,},
     {"id":{"name":"obj_cloud_maker","path":"objects/obj_cloud_maker/obj_cloud_maker.yy",},"order":3,},
     {"id":{"name":"obj_camera","path":"objects/obj_camera/obj_camera.yy",},"order":4,},
