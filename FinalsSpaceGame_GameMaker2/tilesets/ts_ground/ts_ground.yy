@@ -2,10 +2,6 @@
   "resourceType": "GMTileSet",
   "resourceVersion": "1.0",
   "name": "ts_ground",
-  "textureGroupId": {
-    "name": "Default",
-    "path": "texturegroups/Default",
-  },
   "spriteId": {
     "name": "spr_ground_tiles",
     "path": "sprites/spr_ground_tiles/spr_ground_tiles.yy",
@@ -16,9 +12,13 @@
   "tileyoff": 0,
   "tilehsep": 150,
   "tilevsep": 149,
+  "spriteNoExport": true,
+  "textureGroupId": {
+    "name": "Default",
+    "path": "texturegroups/Default",
+  },
   "out_tilehborder": 0,
   "out_tilevborder": 0,
-  "spriteNoExport": true,
   "out_columns": 3,
   "tile_count": 8,
   "autoTileSets": [],

@@ -9,6 +9,8 @@ global.death_state_continue = "continue";
 global.death_current_state = global.death_state_alive;
 
 
+global.screen_shroud = self;
+
 
 fade_lerp_speed = .08;
 

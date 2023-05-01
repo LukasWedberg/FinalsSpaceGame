@@ -16,15 +16,6 @@ function check_tile_collision(x_pos,y_pos, object_checking, tilemap_id){
     _y2 = tilemap_get_cell_y_at_pixel(tilemap_id, obj_x_pos, bbox_bottom + (y_pos - obj_y_pos));
 
 	
-
-	//for(var _x = _x1; _x <= _x2; _x++){
-	 //for(var _y = _y1; _y <= _y2; _y++){
-	   //if(tile_get_index(tilemap_get(tilemap_id, _x, _y))){
-	    //return true;
-	   //}
-	 //}
-	//}
-	
 	if(tile_get_index(tilemap_get(tilemap_id, _x1, _y1))){
 		return true;
 	} 

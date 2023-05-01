@@ -31,6 +31,7 @@
     {"id":{"name":"obj_ship_part","path":"objects/obj_ship_part/obj_ship_part.yy",},"order":9,},
     {"id":{"name":"obj_enemy_parent","path":"objects/obj_enemy_parent/obj_enemy_parent.yy",},"order":2,},
     {"id":{"name":"snd_stomp","path":"sounds/snd_stomp/snd_stomp.yy",},"order":3,},
+    {"id":{"name":"obj_cam","path":"objects/obj_cam/obj_cam.yy",},"order":10,},
     {"id":{"name":"spr_screen_fade","path":"sprites/spr_screen_fade/spr_screen_fade.yy",},"order":10,},
     {"id":{"name":"spr_testing_player_bullet","path":"sprites/spr_testing_player_bullet/spr_testing_player_bullet.yy",},"order":4,},
     {"id":{"name":"snd_revive","path":"sounds/snd_revive/snd_revive.yy",},"order":2,},
