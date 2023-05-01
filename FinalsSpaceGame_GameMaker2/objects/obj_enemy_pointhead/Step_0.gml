@@ -143,7 +143,7 @@ grounded = false;
 var dir = sign(y_vel); 
 for (i = 0; i < abs(y_vel); i++){
 		
-	platform_collision = place_meeting(x,y + dir, obj_dummy_platform);
+	platform_collision = check_tile_collision(x, y+dir, self, global.ground_tiles);
 	
 	 if(platform_collision){
 			
@@ -192,7 +192,7 @@ for (i = 0; i < abs(y_vel); i++){
 var dir = sign(x_vel); 
 for (i = 0; i < abs(x_vel); i++){
 		
-	platform_collision = place_meeting(x+dir,y, obj_dummy_platform);
+	platform_collision = check_tile_collision(x + dir, y, self, global.ground_tiles);
 	
 	 if(platform_collision){
 			

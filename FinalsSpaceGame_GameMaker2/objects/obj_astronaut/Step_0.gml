@@ -37,7 +37,7 @@ switch(global.astronaut_current_state){
 		
 		
 		//Checking just below, for a floor!
-		if(!place_meeting(x,y+1, obj_dummy_platform)){
+		if(!check_tile_collision(x, y+2, obj_astronaut, global.ground_tiles)){
 			
 			show_debug_message(string(y_vel));
 			global.astronaut_current_state = global.astronaut_state_falling;
@@ -245,7 +245,8 @@ for (i = 0; i < abs(y_vel); i++){
 	
 	bullet_collision = instance_place(x,y+dir, obj_bullet);
 	
-	platform_collision = place_meeting(x,y+dir, obj_dummy_platform);
+	//platform_collision = place_meeting(x,y+dir, obj_dummy_platform);
+	platform_collision = check_tile_collision(x, y+dir, obj_astronaut, global.ground_tiles);
 	
 	if( (platform_collision || place_meeting(x,y+dir, obj_enemy_parent) || bullet_collision) && global.astronaut_current_state == global.astronaut_state_blocking ){
 			y_vel = -y_vel;
@@ -325,7 +326,9 @@ for (i = 0; i < abs(x_vel); i++){
 	
 	bullet_collision = instance_place(x+dir,y, obj_bullet);
 	
-	platform_collision = place_meeting(x+dir,y, obj_dummy_platform);
+	//platform_collision = place_meeting(x+dir,y, obj_dummy_platform);
+	platform_collision = check_tile_collision(x+dir, y, obj_astronaut, global.ground_tiles);
+
 	
 	if( (platform_collision || place_meeting(x+dir,y, obj_enemy_parent) || bullet_collision) && global.astronaut_current_state == global.astronaut_state_blocking ){
 		//This first if-statement is for collisions when in bubble mode. 
