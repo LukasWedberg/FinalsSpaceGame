@@ -14,6 +14,8 @@ global.screen_shroud = self;
 
 fade_lerp_speed = .08;
 
+intro_lerp_speed = .01;
+
 
 draw_jumpscare = false;
 

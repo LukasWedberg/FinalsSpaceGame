@@ -92,8 +92,8 @@ part_type_life(bubble_bit, 7, 15);
 
 giblets = part_type_create();
 part_type_shape(giblets, pt_shape_ring); 
-part_type_size(giblets, .05, .25, 0, .05);
-part_type_speed(giblets, 4, 8, -0.20, 0);
+part_type_size(giblets, .05 * 2, .25 * 2, 0, .05 * 2);
+part_type_speed(giblets, 4 * 2, 8 * 2, -0.20 * 2, 0);
 part_type_direction(giblets, 45, 135, 0,20);
 part_type_colour3(giblets, c_red, c_red, c_black);
 part_type_life(giblets, 30, 40);

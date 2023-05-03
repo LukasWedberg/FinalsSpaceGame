@@ -6,3 +6,6 @@ assembled_position_x = 0;
 assembled_position_y = 0; 
 
 collected = false;
+
+
+sprite_index = special_sprite;

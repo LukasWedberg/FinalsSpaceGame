@@ -10,3 +10,5 @@ open_passage = false;
 
 
 ready_for_ending = false;
+
+display_repair_message = false;

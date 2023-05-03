@@ -19,26 +19,24 @@ current_state = global.enemy_state_calm;
 
 //Some tunables!
 bullets_per_second = room_speed * 2;
-
 bullet_timer = bullets_per_second;
 
+move_speed = 3;
 
-
-aggro_distance = 32 * 10; 
-
+aggro_distance = 150 * 5; 
 aggro_levitation_height = y - 16;
-
 aggro_levitation_lerp_speed = .1; //Ranges from 0-1. The lower this is, the slower the enemy rises.
 
 
-calm_height = y;
+attacking_distance = 150 * 5;
 
-calm_distance = 32 * 15;
+
+calm_height = y;
+calm_distance = 150 * 80;
 
 
 target_x = 0;
 target_y = 0;
-
 
 
 maximum_hp = 3;
@@ -49,3 +47,15 @@ currently_invincible = false;
 
 
 player = global.astronaut;
+
+
+parts = part_system_create_layer("Instances", false);
+part_system_depth(parts, -1000000);
+
+giblets = part_type_create();
+part_type_shape(giblets, pt_shape_ring); 
+part_type_size(giblets, .05 * 2, .25 * 2, 0, .05 * 2);
+part_type_speed(giblets, 4 * 2, 8 * 2, -0.20 * 2, 0);
+part_type_direction(giblets, 45, 135, 0,20);
+part_type_colour3(giblets, c_red, c_red, c_black);
+part_type_life(giblets, 30, 40);

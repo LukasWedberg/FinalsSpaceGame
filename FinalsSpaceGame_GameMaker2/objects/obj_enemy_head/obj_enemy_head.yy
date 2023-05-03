@@ -3,8 +3,8 @@
   "resourceVersion": "1.0",
   "name": "obj_enemy_head",
   "spriteId": {
-    "name": "spr_testing_enemy",
-    "path": "sprites/spr_testing_enemy/spr_testing_enemy.yy",
+    "name": "spr_head_idle",
+    "path": "sprites/spr_head_idle/spr_head_idle.yy",
   },
   "solid": false,
   "visible": true,

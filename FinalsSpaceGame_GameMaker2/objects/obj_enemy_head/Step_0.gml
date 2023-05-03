@@ -33,16 +33,40 @@ switch(current_state) {
 	
 	case global.enemy_state_attacking:
 		//show_debug_message("UNINTELLIGABLE SCREAMING");
+				
+		
+		var player_dist = point_distance(player.x, player.y, x, y );
 		
 		if(bullet_timer < bullets_per_second){
 			bullet_timer++;
-		
-		}else{
 			
-			bullet_timer = 0;
+			var move_direction = sign(player.x - x);
+				
+			if(move_direction != 0){
+				image_xscale = abs(image_xscale) * -move_direction;
+			}
+			
+			if(point_distance(player.x, player.y, x, y ) > attacking_distance){
+		
+				sprite_index = spr_head_walk;
+				
+				
+				
+				//The next few lines are commented out, but only optionally. They give the pointhead more of a "lurch-y" walk.
+				
+				//var walk_alpha = (sin(current_time*franticness) + 1)/2
+				//image_speed = walk_alpha;
+		
+				x += (move_speed * move_direction)// * walk_alpha;
+				
+				
+			}
+			
+		
+		}else{ //if(player_dist <= attacking_distance) {
 			//show_debug_message("PEW PEW: " + string(current_time));
 			
-			if(point_distance(player.x, player.y, x, y ) > calm_distance) {
+			if(point_distance(player.x, player.y, x, y ) > calm_distance || !player.alive) {
 		
 				//Play calm noises or make sprite changes here!
 			
@@ -52,11 +76,29 @@ switch(current_state) {
 				bullet_timer = bullets_per_second;
 			}else{
 				
-				target_x = global.astronaut.x;
-				target_y = global.astronaut.y;
+				if(sprite_index != spr_head_attack){
+					sprite_index = spr_head_attack
 				
-				//play bullet noises or make sprite changes here!
-				make_bullets(self, x, y, target_x, target_y, global.bullet_technique_standard);
+				
+				}else {
+				
+				
+					if(image_index > image_number-1){
+						
+						target_x = global.astronaut.x;
+						target_y = global.astronaut.y;
+				
+						//play bullet noises or make sprite changes here!
+						make_bullets(self, x, y, target_x, target_y, global.bullet_technique_standard);
+			
+						bullet_timer = 0;
+						
+						sprite_index = spr_head_idle;
+			
+					}
+				
+				
+				}
 			}
 		
 		}
@@ -85,5 +127,7 @@ if(invincibility_timer > 0){
 
 if(current_hp <= 0 ){
 	instance_destroy();
+	
+	part_particles_create(parts, x, y + 80, giblets, 10);
 
 }

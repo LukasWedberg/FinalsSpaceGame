@@ -87,8 +87,11 @@ switch(current_state){
 			
 				var move_direction = sign(player.x - x);
 				
-				image_xscale = abs(image_xscale) * -move_direction;
-		
+				if(move_direction != 0){
+					image_xscale = abs(image_xscale) * -move_direction;
+				}
+				
+				
 				sprite_index = spr_pointhead_walk;
 				
 				
@@ -126,7 +129,7 @@ if(invincibility_timer > 0){
 }
 
 if(current_hp <= 0 ){
-	part_particles_create(parts, x, y+sprite_height/2, giblets, 10);
+	part_particles_create(parts, x, y+100, giblets, 10);
 	
 	instance_destroy();
 
@@ -163,7 +166,7 @@ for (i = 0; i < abs(y_vel); i++){
 			if( floor(abs(y_vel)) == i){
 				remaining_y = y_vel - floor(y_vel);
 			
-				x += remaining_x;
+				y += remaining_y;
 			}
 		
 		} else if(dir > 0){

@@ -6,6 +6,7 @@ switch(global.death_current_state){
 
 	case global.death_state_alive:
 	
+		image_alpha = lerp(image_alpha, 0, intro_lerp_speed);
 		
 		if(!global.astronaut.alive){
 			global.death_current_state = global.death_state_fading;
