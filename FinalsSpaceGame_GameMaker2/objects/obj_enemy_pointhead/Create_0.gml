@@ -28,7 +28,7 @@ pointy_gravity = .08;
 
 
 
-move_speed = 1;
+move_speed = 2;
 
 jump_force = -1;
 
