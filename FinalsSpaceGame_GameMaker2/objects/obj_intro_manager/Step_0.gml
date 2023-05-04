@@ -3,15 +3,15 @@
 
 cinematic_timer++;
 
-if(cinematic_timer < room_speed * 18){
+if(cinematic_timer < room_speed * 19){
 
 		
 	
 
-}else if(cinematic_timer < room_speed * 38){
+}else if(cinematic_timer < room_speed * 39){
 
 	message_to_display = " ''A LONE TRAVELER CRASHLANDS ON A MYSTERIOUS PLANET. IT'S QUIET BUT YOU FEEL CREATURES HOSTILE BEYOND COMPREHENSION ARE CLOSE -- they ARE CLOSING IN ON YOU FAST. YOU MUST FIND A WAY TO GET OUT OF THIS HELL.'' ";
-} else if(cinematic_timer < room_speed * 56){
+} else if(cinematic_timer < room_speed * 57){
 
 	message_to_display = "* ARROW KEYS TO MOVE AND JUMP \n* Q - MELEE, W - SHIELD, E - SHOOT \n* SURVIVE THE MONSTERS \n* COLLECT ALL THREE SHIP COMPONENTS TO REBUILD YOUR SHIP \n\n ''GOOD LUCK''";
 
