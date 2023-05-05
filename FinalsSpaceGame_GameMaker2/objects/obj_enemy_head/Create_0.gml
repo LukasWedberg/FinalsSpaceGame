@@ -13,13 +13,13 @@ global.enemy_state_attacking = "attacking";
 current_state = global.enemy_state_calm;
 
 
-
+x_vel = 0;
 
 
 
 //Some tunables!
 bullets_per_second = room_speed * 2;
-bullet_timer = bullets_per_second;
+bullet_timer = bullets_per_second * random(1);
 
 move_speed = 3;
 
@@ -32,7 +32,7 @@ attacking_distance = 150 * 5;
 
 
 calm_height = y;
-calm_distance = 150 * 80;
+calm_distance = 150 * 8;
 
 
 target_x = 0;
@@ -44,6 +44,7 @@ current_hp = maximum_hp;
 invincibility_frames = room_speed * .5;
 invincibility_timer = 0;
 currently_invincible = false;
+
 
 
 player = global.astronaut;

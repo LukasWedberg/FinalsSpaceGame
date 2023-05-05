@@ -63,7 +63,7 @@ switch(current_state){
 				
 						show_debug_message("BOO!: " + string(current_time) );	
 				
-						player.current_hp = 0;
+						player.current_hp -= damage_dealt;
 						
 						player.oogly_boogly_type = enemy_type;
 					

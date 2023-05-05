@@ -21,6 +21,15 @@ switch(global.astronaut_current_state){
 		
 		y_vel += player_gravity;
 		
+		if(ranged_key_pressed){
+			
+			sprite_index = spr_player_jump_shoot;
+			
+		}else{
+			sprite_index = spr_player_jump;
+		
+		}
+		
 		
 		
 	break;
@@ -28,12 +37,6 @@ switch(global.astronaut_current_state){
 	case global.astronaut_state_grounded:
 	
 	
-		if(jump_key_pressed){
-	
-	
-			global.astronaut_current_state = global.astronaut_state_jumping;
-			
-		}
 		
 		
 		//Checking just below, for a floor!
@@ -41,9 +44,47 @@ switch(global.astronaut_current_state){
 			
 			show_debug_message(string(y_vel));
 			global.astronaut_current_state = global.astronaut_state_falling;
+			
+			sprite_index = spr_player_jump;
 		
+		}else{
+			
+			if(abs(x_vel) > .3){
+
+				if(ranged_key_pressed){
+			
+					//Replace this with the walking-shooting animation!
+					sprite_index = spr_player_idle_shoot;
+			
+				}else{
+					sprite_index = spr_player_walk;
+				}
+				
+			}else if(ranged_key_pressed){
+			
+				sprite_index = spr_player_idle_shoot;
+			
+			}else{
+				sprite_index = spr_player_idle;
+			}
 		}
 		
+		if(jump_key_pressed){
+	
+	
+			global.astronaut_current_state = global.astronaut_state_jumping;
+			
+			if(ranged_key_pressed){
+			
+					sprite_index = spr_player_jump_shoot;
+			
+				}else{
+					sprite_index = spr_player_jump;
+			}
+			
+			
+			
+		}
 
 
 	break;
@@ -54,6 +95,9 @@ switch(global.astronaut_current_state){
 	
 	
 		if(jump_key_pressed){
+	
+			part_particles_create(parts, x - sign(image_xscale) * 15, y, jetpack, 5);			
+			
 	
 			if(jump_hold_timer < jump_hold_frames_in_seconds){ 
 	
@@ -67,6 +111,15 @@ switch(global.astronaut_current_state){
 				global.astronaut_current_state = global.astronaut_state_falling;
 				
 				jump_hold_timer = 0;
+			}
+			
+			if(ranged_key_pressed){
+			
+				sprite_index = spr_player_jump_shoot;
+			
+			}else{
+				sprite_index = spr_player_jump;
+		
 			}
 			
 			
@@ -88,7 +141,7 @@ switch(global.astronaut_current_state){
 			//this is where we switch back to non-bouncing mode!
 			//Sprite changes and sounds go here!
 			
-			sprite_index = spr_proto_space_man;
+			sprite_index = spr_player_jump;
 			global.astronaut_current_state = global.astronaut_state_falling;
 		}
 	
@@ -133,7 +186,7 @@ if(alive && global.astronaut_current_state != global.astronaut_state_blocking){
 	
 	
 	//Movement, here!
-	image_speed = 1;
+	//image_speed = 1;
 	if(left_key_pressed){
 		x_vel = -move_speed;
 	
@@ -147,7 +200,7 @@ if(alive && global.astronaut_current_state != global.astronaut_state_blocking){
 		image_xscale = abs(image_xscale);
 	
 	} else{
-		image_speed = 0;
+		//image_speed = 0;
 	}
 	
 	
@@ -157,8 +210,8 @@ if(alive && global.astronaut_current_state != global.astronaut_state_blocking){
 		
 		//Sprite changes and sound effects go here! 
 		
-		sprite_index = spr_testing_shield;
-		image_speed = 1;
+		sprite_index = spr_shield;
+		//image_speed = 1;
 		
 		
 		global.astronaut_current_state = global.astronaut_state_blocking;
@@ -170,13 +223,22 @@ if(alive && global.astronaut_current_state != global.astronaut_state_blocking){
 		
 		}else{
 			
-			
+						
 			
 			//Here, we make a bul5let! Put sound effects and animations here, too.
 			
-			var new_bullet = instance_create_depth(x,y, 0, obj_player_bullet);
+			var new_bullet = instance_create_depth(x,y-20, 0, obj_player_bullet);
 			
 			new_bullet.hspeed = bullet_speed * sign(image_xscale);
+			
+			new_bullet.image_xscale = sign(image_xscale);
+			
+			if(global.astronaut_current_state == global.astronaut_state_jumping || global.astronaut_current_state == global.astronaut_state_falling){
+				sprite_index = spr_player_jump_shoot
+			
+			}else{
+				sprite_index = spr_player_idle_shoot;
+			}
 			
 			bullet_timer = 0;		
 		}
@@ -191,6 +253,8 @@ if(alive && global.astronaut_current_state != global.astronaut_state_blocking){
 	if(bullet_collision){
 		current_hp--;
 		
+		invincibility_timer = invincibility_frames;
+		
 		oogly_boogly_type = bullet_collision.sender.enemy_type;
 		
 		show_debug_message("OUCHIEEE: "  + string(current_time));
@@ -198,6 +262,19 @@ if(alive && global.astronaut_current_state != global.astronaut_state_blocking){
 		instance_destroy(bullet_collision);		
 		
 	}
+	
+	if(invincibility_timer > 0){
+	invincibility_timer--;
+	currently_invincible = true;
+	
+	image_blend = c_red;
+
+	}else{
+		currently_invincible = false;
+	
+		image_blend = c_white;
+	}
+	
 	
 	if(current_hp <= 0){
 			
@@ -219,6 +296,7 @@ if(alive && global.astronaut_current_state != global.astronaut_state_blocking){
 		
 			
 	}
+	
 	
 
 }

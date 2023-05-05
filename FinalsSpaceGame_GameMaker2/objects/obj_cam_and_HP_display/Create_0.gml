@@ -41,3 +41,7 @@ camera_set_view_pos(view_camera[0], cam_x_new_pos, cam_y_new_pos);
 
 screen_shroud.x = cam_x_new_pos + cam_width/2;
 screen_shroud.y = cam_y_new_pos + cam_height/2;
+
+draw_hearts_x = 0;
+draw_hearts_y = 0;
+heart_x_padding = 64;

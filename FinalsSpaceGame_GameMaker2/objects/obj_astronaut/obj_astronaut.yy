@@ -3,8 +3,8 @@
   "resourceVersion": "1.0",
   "name": "obj_astronaut",
   "spriteId": {
-    "name": "spr_proto_space_man",
-    "path": "sprites/spr_proto_space_man/spr_proto_space_man.yy",
+    "name": "spr_player_jump",
+    "path": "sprites/spr_player_jump/spr_player_jump.yy",
   },
   "solid": false,
   "visible": true,

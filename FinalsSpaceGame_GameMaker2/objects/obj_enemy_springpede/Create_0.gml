@@ -27,6 +27,8 @@ landed = false;
 
 //Some tunables!
 
+damage_dealt = 2;
+
 
 leaping_speed = 10;
 

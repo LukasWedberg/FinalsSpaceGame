@@ -19,7 +19,7 @@ switch(bullet_technique){
 
 
 
-if(point_distance(x,y, target_x, target_y) < bullet_speed){
+if(point_distance(x,y, target_x, target_y) < bullet_speed || check_tile_collision(x,y, self, global.ground_tiles)){
 	instance_destroy();
 
 }

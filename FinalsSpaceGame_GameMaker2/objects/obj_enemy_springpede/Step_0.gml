@@ -42,9 +42,11 @@ switch(current_state){
 			
 			player_distance = point_distance(x,y, player.x, player.y);
 		
-			if(player_distance < attacking_distance || attacking_start_lag_timer > 0 ){
+			if(player_distance < attacking_distance){
 				
 				current_state = global.enemy_state_leaping;
+				
+				
 				
 			}else{
 			
@@ -146,7 +148,9 @@ switch(current_state){
 				
 				
 				if(global.astronaut_current_state != global.astronaut_state_blocking){
-					player.current_hp--;
+					player.current_hp -= damage_dealt;
+					
+					player.oogly_boogly_type = global.enemy_type_springpede; 
 					
 					show_debug_message("POKEY-POKE!");
 				}
@@ -182,8 +186,6 @@ switch(current_state){
 				//show_debug_message("YEEEEEEEE");
 			
 			}else{
-				
-				
 				
 				attacking_start_lag_timer = 0;
 				
@@ -259,6 +261,9 @@ for (i = 0; i < abs(y_vel); i++){
 		grounded = true;
 
 		if(airborn){
+			
+			image_speed = 0;
+
 			landed = true;
 			
 			current_springy_gravity = 0;
@@ -314,6 +319,8 @@ for (i = 0; i < abs(x_vel); i++){
 			
 		
 		if(airborn){
+			
+			image_speed = 0;
 			
 			show_debug_message("SPLORSHH");
 			

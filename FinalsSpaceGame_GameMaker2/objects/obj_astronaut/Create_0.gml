@@ -45,9 +45,9 @@ jump_hold_timer = 0;
 
 
 //Tunables
-player_gravity = 0.1;
+player_gravity = 0.2;
 
-jump_force = -7/3;
+jump_force = -6;
 
 move_speed = 5;
 
@@ -65,8 +65,11 @@ bullet_speed = 3;
 
 
 
-maximum_hp = 3;
+maximum_hp = 10;
 current_hp = maximum_hp;
+invincibility_frames = room_speed * .5;
+invincibility_timer = 0;
+currently_invincible = false;
 alive = true;
 
 respawn_time = room_speed * 8;
@@ -97,3 +100,13 @@ part_type_speed(giblets, 4 * 2, 8 * 2, -0.20 * 2, 0);
 part_type_direction(giblets, 45, 135, 0,20);
 part_type_colour3(giblets, c_red, c_red, c_black);
 part_type_life(giblets, 30, 40);
+
+
+
+jetpack = part_type_create();
+part_type_shape(jetpack, pt_shape_spark); 
+part_type_size(jetpack, .25, .5, -.01, .05);
+part_type_speed(jetpack, 8, 16, -0.20 * 2, 0);
+part_type_direction(jetpack, 270 - 5, 270 + 5, 0,10);
+part_type_colour3(jetpack, c_red, c_yellow, c_white);
+part_type_life(jetpack, 30, 40);

@@ -21,6 +21,7 @@ y_vel = 0;
 
 //Some tunables!
 
+damage_dealt = 1;
 
 
 pointy_gravity = .08;

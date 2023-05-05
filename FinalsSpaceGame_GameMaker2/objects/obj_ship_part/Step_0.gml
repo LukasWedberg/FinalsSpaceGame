@@ -11,6 +11,8 @@ if(!collected){
 		y = assembled_position_y;
 	
 		global.parts_collected++;
+		
+		global.astronaut.current_hp = global.astronaut.maximum_hp;
 
 		
 

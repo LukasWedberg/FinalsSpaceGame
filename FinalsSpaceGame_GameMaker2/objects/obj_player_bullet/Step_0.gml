@@ -18,7 +18,9 @@ if(enemy_collision){
 
 bullet_collision = instance_place(x,y, obj_bullet);
 
-if(bullet_collision){
+time_alive++;
+
+if(bullet_collision || time_alive > lifespan){
 	instance_destroy(bullet_collision);
 	instance_destroy();
 	
