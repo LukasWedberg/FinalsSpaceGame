@@ -19,3 +19,7 @@ screen_shroud.y = cam_y_new_pos + cam_height/2;
 
 draw_hearts_x = cam_x_new_pos + 42;
 draw_hearts_y = cam_y_new_pos + 42;
+
+
+//stars.x = target_x;
+//stars.y = target_y;

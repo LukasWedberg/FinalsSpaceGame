@@ -10,6 +10,9 @@ cam_height = camera_get_view_height(view_camera[0]);
 screen_shroud = global.screen_shroud;
 
 
+stars = instance_find(obj_stars,0);
+
+
 
 
 //Some tunables here!
@@ -17,7 +20,7 @@ screen_shroud = global.screen_shroud;
 cam_lerp_speed = .2;
 
 x_offset = 0;
-y_offset = -200;
+y_offset = -100;
 
 
 

@@ -52,7 +52,9 @@ switch(current_state){
 			
 				var move_direction = sign(player.x - x);
 				
-				image_xscale = abs(image_xscale) * -move_direction;
+				if(move_direction != 0){
+					image_xscale = abs(image_xscale) * -move_direction;
+				}
 		
 				sprite_index = spr_springpede_walk;
 				
@@ -81,6 +83,7 @@ switch(current_state){
 		//show_debug_message("THROW THROW");				
 				
 		if(sprite_index != spr_springpede_attack){
+			image_index = 0;
 			sprite_index = spr_springpede_attack;
 			image_index = 0;
 					
@@ -97,6 +100,7 @@ switch(current_state){
 			//wind-up animation
 			
 			attacking_start_lag_timer++;
+			//attacking_start_lag_timer = attacking_start_lag_time + 1;
 				
 			//x_vel = lerp(x_vel, leaping_speed * -sign(image_xscale), .05);
 
@@ -141,18 +145,26 @@ switch(current_state){
 			}
 					
 			if(place_meeting(x + x_vel, y + y_vel, obj_astronaut)){
+				
+				image_speed = 0;
+				
+				image_index = image_number-1;
 				x_vel = 0;
 				landed = true
 				
 				current_springy_gravity = 0;
 				
 				
-				if(global.astronaut_current_state != global.astronaut_state_blocking){
+				if(global.astronaut_current_state != global.astronaut_state_blocking){					
 					player.current_hp -= damage_dealt;
+					
+					player.invincibility_timer = player.invincibility_frames;
 					
 					player.oogly_boogly_type = global.enemy_type_springpede; 
 					
 					show_debug_message("POKEY-POKE!");
+				}else{
+					player.x_vel = sign(player.x - x) * 6;
 				}
 				
 				
@@ -166,7 +178,7 @@ switch(current_state){
 				
 		} else{
 			
-			if(position_meeting(x + (80) * -sign(image_xscale), y, player)){
+			if(position_meeting(x + (80) * -sign(image_xscale), y, player) || check_tile_collision(x  -sign(image_xscale), y, self, global.ground_tiles)){
 				x_vel = 0;
 
 				current_springy_gravity = 0;
@@ -248,7 +260,7 @@ if(current_hp <= 0 ){
 
 
 
-grounded = false;
+
 var dir = sign(y_vel); 
 for (i = 0; i < abs(y_vel); i++){
 		
@@ -257,12 +269,12 @@ for (i = 0; i < abs(y_vel); i++){
 	 if(platform_collision){
 		//We've hit something the springpede collides with -- time to stop moving them.
 		y_vel = 0;
-		
-		grounded = true;
 
-		if(airborn){
+		if(airborn && !landed){
 			
 			image_speed = 0;
+			
+			image_index = image_number-1;
 
 			landed = true;
 			
@@ -318,11 +330,13 @@ for (i = 0; i < abs(x_vel); i++){
 	if(platform_collision){
 			
 		
-		if(airborn){
+		if(airborn && !landed){
 			
 			image_speed = 0;
 			
-			show_debug_message("SPLORSHH");
+			image_index = image_number-1;
+			
+			//show_debug_message("SPLORSHH");
 			
 			current_springy_gravity = 0;
 			
@@ -336,7 +350,7 @@ for (i = 0; i < abs(x_vel); i++){
 		//We've hit something the springpede collides with -- time to stop moving them.
 		x_vel = 0;	
 		
-		landed = true;
+		//landed = true;
 			
 		break;
 		

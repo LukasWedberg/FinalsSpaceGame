@@ -8,10 +8,9 @@ left_key_pressed = keyboard_check(vk_left);
 right_key_pressed = keyboard_check(vk_right);
 ranged_key_pressed = keyboard_check(ord("E"));
 shield_key_pressed = keyboard_check(ord("W"));
+melee_key_pressed = keyboard_check(ord("Q"));
 
-
-
-
+//show_debug_message(global.astronaut_current_state);
 
 
 
@@ -25,6 +24,9 @@ switch(global.astronaut_current_state){
 			
 			sprite_index = spr_player_jump_shoot;
 			
+		}else if(sword_active){
+			sprite_index = spr_player_melee;	
+			image_speed = 1;
 		}else{
 			sprite_index = spr_player_jump;
 		
@@ -53,8 +55,7 @@ switch(global.astronaut_current_state){
 
 				if(ranged_key_pressed){
 			
-					//Replace this with the walking-shooting animation!
-					sprite_index = spr_player_idle_shoot;
+					sprite_index = spr_player_walk_shoot;
 			
 				}else{
 					sprite_index = spr_player_walk;
@@ -66,6 +67,8 @@ switch(global.astronaut_current_state){
 			
 			}else{
 				sprite_index = spr_player_idle;
+				//show_debug_message("BOING: "  + string(current_time));
+		
 			}
 		}
 		
@@ -76,10 +79,15 @@ switch(global.astronaut_current_state){
 			
 			if(ranged_key_pressed){
 			
-					sprite_index = spr_player_jump_shoot;
+				sprite_index = spr_player_jump_shoot;
 			
-				}else{
-					sprite_index = spr_player_jump;
+			}else if(sword_active){
+				sprite_index = spr_player_melee;	
+				image_speed = 1;
+			}
+			
+			else{
+				sprite_index = spr_player_jump;
 			}
 			
 			
@@ -117,6 +125,9 @@ switch(global.astronaut_current_state){
 			
 				sprite_index = spr_player_jump_shoot;
 			
+			}else if(sword_active){
+				sprite_index = spr_player_melee;	
+				image_speed = 1;
 			}else{
 				sprite_index = spr_player_jump;
 		
@@ -140,6 +151,8 @@ switch(global.astronaut_current_state){
 			
 			//this is where we switch back to non-bouncing mode!
 			//Sprite changes and sounds go here!
+			
+			audio_sound_gain(snd_shield, 0, 500);
 			
 			sprite_index = spr_player_jump;
 			global.astronaut_current_state = global.astronaut_state_falling;
@@ -205,14 +218,19 @@ if(alive && global.astronaut_current_state != global.astronaut_state_blocking){
 	
 	
 	
-	if(shield_key_pressed){
-		
+	if(shield_key_pressed && !sword_active){
+		audio_sound_gain(snd_shield, 1, 0);
+		audio_stop_sound(snd_shield);
 		
 		//Sprite changes and sound effects go here! 
 		
 		sprite_index = spr_shield;
 		//image_speed = 1;
 		
+		if(!audio_is_playing(snd_shield)){
+			
+			audio_play_sound(snd_shield, 10, false,1);
+		}
 		
 		global.astronaut_current_state = global.astronaut_state_blocking;
 		
@@ -225,7 +243,9 @@ if(alive && global.astronaut_current_state != global.astronaut_state_blocking){
 			
 						
 			
-			//Here, we make a bul5let! Put sound effects and animations here, too.
+			//Here, we make a bullet! Put sound effects and animations here, too.
+			
+			audio_play_sound(snd_shoot, 10,false);
 			
 			var new_bullet = instance_create_depth(x,y-20, 0, obj_player_bullet);
 			
@@ -244,10 +264,66 @@ if(alive && global.astronaut_current_state != global.astronaut_state_blocking){
 		}
 		
 	
+	}else if(melee_key_pressed || sword_active){
+		//
+		sprite_index = spr_player_melee;	
+		
+		
+		
+		//if(image_index >= image_number){
+			//image_index = 0;
+		//}
+	
+		if(sword_frame_counter == 0){
+			//image_speed = 1;
+			image_index = 0;
+		}
+		
+		sword_frame_counter++;
+	
+		//image_speed = 1;
+		
+		if(melee_key_pressed){
+			sword_active = true;
+		}
+		
+		//SO we can check for collisions using a timer or by using the image_index. 
+		//I think it'll be better if we go with image_index, but that will be harder. 
+		//Here goes nothing!
+		
+			
+		
+		if( (image_index >= image_number-1) ){// || (image_index == 0 && image_speed == -1) ){			
+			enemy_struck = instance_place(x + sword_reach * sign(image_xscale),y, obj_enemy_parent);
+			
+			if(!audio_is_playing(snd_melee)){
+				audio_play_sound(snd_melee, 10,false);
+			}
+			
+			if(enemy_struck){
+				enemy_struck.current_hp -=3;
+				enemy_struck.invincibility_timer = enemy_struck.invincibility_frames;			
+			}
+			
+			if(!melee_key_pressed){
+				sword_active = false;
+				sword_frame_counter = 0;
+			}
+		
+			//image_speed = 0;
+		
+		}
+		
+		
+		
+		
+		
+	}else {
+		
 	}
 	
 	
-	
+	//Checking for collisions with enemy bullets!
 	bullet_collision = instance_place(x,y, obj_bullet);
 
 	if(bullet_collision){
@@ -264,10 +340,10 @@ if(alive && global.astronaut_current_state != global.astronaut_state_blocking){
 	}
 	
 	if(invincibility_timer > 0){
-	invincibility_timer--;
-	currently_invincible = true;
+		invincibility_timer--;
+		currently_invincible = true;
 	
-	image_blend = c_red;
+		image_blend = c_red;
 
 	}else{
 		currently_invincible = false;
@@ -288,7 +364,12 @@ if(alive && global.astronaut_current_state != global.astronaut_state_blocking){
 		show_debug_message("KO!");
 		
 		part_particles_create(parts, x, y+sprite_height/2, giblets, 10);
+		
+		audio_stop_all();
+		
+		instance_destroy( instance_find(obj_ambience,0) );
 			
+		audio_play_sound(snd_bones_snapping,10,false);
 			
 		global.astronaut_current_state = global.astronaut_state_knocked_out;
 			
@@ -318,20 +399,27 @@ var dir = sign(y_vel);
 
 
 
-for (i = 0; i < abs(y_vel); i++){
+for (i = 0; i < floor(abs(y_vel)); i++){
 	//Checking for tile set collisions works a bit differently than testing for objects. It's checking for objects right now because "testing."
 	
-	bullet_collision = instance_place(x,y+dir, obj_bullet);
+	bullet_collision = instance_place(x,y+dir*2.5, obj_bullet);
 	
 	//platform_collision = place_meeting(x,y+dir, obj_dummy_platform);
-	platform_collision = check_tile_collision(x, y+dir, obj_astronaut, global.ground_tiles);
+	platform_collision = check_tile_collision(x, y+dir*2.5, obj_astronaut, global.ground_tiles);
 	
-	if( (platform_collision || place_meeting(x,y+dir, obj_enemy_parent) || bullet_collision) && global.astronaut_current_state == global.astronaut_state_blocking ){
+	enemy_collision = place_meeting(x,y+dir*2.5, obj_enemy_parent)
+	
+	if( (platform_collision || enemy_collision || bullet_collision) && global.astronaut_current_state == global.astronaut_state_blocking ){
 			y_vel = -y_vel;
 		
 		
 			//We're shifting the y over a tiny bit so we don't get stuck in the ground!
-			y -= dir*3;
+			
+		
+			if(!enemy_collision){
+				y -= dir*6;		
+			}
+		
 		
 			show_debug_message("BOING: "  + string(current_time));
 		
@@ -372,6 +460,9 @@ for (i = 0; i < abs(y_vel); i++){
 		
 		
 		//If this is the final inch, we also have to add the remaining decimal numbers!
+		
+		
+		
 		if(dir < 0){
 		
 			if( floor(abs(y_vel)) == i){
@@ -393,6 +484,8 @@ for (i = 0; i < abs(y_vel); i++){
 			
 		}
 		
+		
+		
 	}
 }
 
@@ -400,15 +493,15 @@ for (i = 0; i < abs(y_vel); i++){
 
 //This for-loop is the same as the one above, but it works for the x axis instead of the y axis.
 var dir = sign(x_vel); 
-for (i = 0; i < abs(x_vel); i++){
+for (i = 0; i < floor(abs(x_vel)); i++){
 	
-	bullet_collision = instance_place(x+dir,y, obj_bullet);
+	bullet_collision = instance_place(x+dir*2,y, obj_bullet);
 	
 	//platform_collision = place_meeting(x+dir,y, obj_dummy_platform);
-	platform_collision = check_tile_collision(x+dir, y, obj_astronaut, global.ground_tiles);
+	platform_collision = check_tile_collision(x+dir*2, y, obj_astronaut, global.ground_tiles);
 
 	
-	if( (platform_collision || place_meeting(x+dir,y, obj_enemy_parent) || bullet_collision) && global.astronaut_current_state == global.astronaut_state_blocking ){
+	if( (platform_collision || place_meeting(x+dir*2,y, obj_enemy_parent) || bullet_collision) && global.astronaut_current_state == global.astronaut_state_blocking ){
 		//This first if-statement is for collisions when in bubble mode. 
 		x_vel = -x_vel;
 			
@@ -417,6 +510,7 @@ for (i = 0; i < abs(x_vel); i++){
 		x -= dir*3;
 			
 		show_debug_message("BOING: "  + string(current_time));
+		
 		
 		
 		//Down here we make some shield particles because we're bouncing!

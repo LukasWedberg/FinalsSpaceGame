@@ -23,16 +23,16 @@ bullet_timer = bullets_per_second * random(1);
 
 move_speed = 3;
 
-aggro_distance = 150 * 5; 
+aggro_distance = 150 * 3; 
 aggro_levitation_height = y - 16;
 aggro_levitation_lerp_speed = .1; //Ranges from 0-1. The lower this is, the slower the enemy rises.
 
 
-attacking_distance = 150 * 5;
+attacking_distance = 150 * 2.5;
 
 
 calm_height = y;
-calm_distance = 150 * 8;
+calm_distance = 150 * 4;
 
 
 target_x = 0;

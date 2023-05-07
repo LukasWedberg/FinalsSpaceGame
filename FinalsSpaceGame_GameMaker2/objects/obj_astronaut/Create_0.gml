@@ -63,6 +63,12 @@ bullets_per_second = room_speed * .5;
 bullet_timer = bullets_per_second;
 bullet_speed = 3;
 
+sword_frame_counter = 0;
+
+
+sword_active = false;
+sword_reach = 45;
+
 
 
 maximum_hp = 10;

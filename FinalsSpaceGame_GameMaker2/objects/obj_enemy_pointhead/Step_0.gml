@@ -59,14 +59,26 @@ switch(current_state){
 				}else{
 					//Put attacking animations and sounds here!
 					
-					if(player_distance < attacking_distance && global.astronaut_current_state != global.astronaut_state_blocking){
+					if(player_distance < attacking_distance){
 				
-						show_debug_message("BOO!: " + string(current_time) );	
-				
-						player.current_hp -= damage_dealt;
+						if(global.astronaut_current_state != global.astronaut_state_blocking){
 						
-						player.oogly_boogly_type = enemy_type;
+							
+							show_debug_message("BOO!: " + string(current_time) );	
+				
+							player.current_hp -= damage_dealt;
+						
+							player.invincibility_timer = player.invincibility_frames;
 					
+						
+							player.oogly_boogly_type = enemy_type;
+					
+							
+						}else{
+							player.x_vel = sign(player.x - x) * 6;
+						
+						}
+				
 					}
 					
 					attacking_start_lag_timer = 0;

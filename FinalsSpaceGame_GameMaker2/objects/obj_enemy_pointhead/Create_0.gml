@@ -57,7 +57,7 @@ target_y = 0;
 
 
 
-maximum_hp = 3;
+maximum_hp = 1;
 current_hp = maximum_hp;
 invincibility_frames = room_speed * .5;
 invincibility_timer = 0;

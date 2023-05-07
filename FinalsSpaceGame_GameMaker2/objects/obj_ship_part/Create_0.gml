@@ -2,8 +2,8 @@
 // You can write your code in this editor
 
 
-assembled_position_x = 0;
-assembled_position_y = 0; 
+assembled_position_x = -100;
+assembled_position_y = -100; 
 
 collected = false;
 
